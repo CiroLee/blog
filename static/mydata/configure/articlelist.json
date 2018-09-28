@@ -1,6 +1,15 @@
 {
     "articlelist":[
         {
+            "id":"006",
+            "star":5,
+            "title":"热点简易编辑器",
+            "abstract":"热点简易编辑器，使用Electron编写的桌面软件",
+            "tags":["javascript"],
+            "lasttime":"2018-9-27",
+            "url":"hotspoteditor"
+        },
+        {
             "id":"005",
             "star":5,
             "title":"全景拥抱小程序（二）",
