@@ -7,7 +7,7 @@ krpano是一款强大的全景引擎，可以帮助全景爱好者和开发者�
 
 ![](https://cirolee.github.io/blog/static/mydata/article_images/editor_01.png)         
 
-   ![]（https://cirolee.github.io/blog/static/mydata/article_images/editor_2.png)        
+   ![](https://cirolee.github.io/blog/static/mydata/article_images/editor_2.png)        
 
 热点简易编辑器包含了热点hotspot的常用属性的编辑，如：拖拽、尺寸（scale）、透明度（alpha）、深度（depth）、旋转（rotate）、偏移（offset）和3D旋转（3drotate）。    
 
