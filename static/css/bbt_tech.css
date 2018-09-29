@@ -10,6 +10,10 @@ margin:0;
 padding:0;
 background: #efefef;
 }
+/**special**/
+.qrcode-block img[data-v-5d0e7262]{
+ width:auto;
+}
 
 /**滚动条美化**/
 /* ::-webkit-scrollbar {
