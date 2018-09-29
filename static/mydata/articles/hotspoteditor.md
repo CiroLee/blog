@@ -5,9 +5,9 @@ krpano是一款强大的全景引擎，可以帮助全景爱好者和开发者�
 
 经过无数个日日夜夜的努力（其实是偷懒啦~~），终于完成了热点编辑器的简易版，特点是使用方便，所有属性操作都可以实时预览。       
 
-![01](../article_images/editor_01.png)         
+![01](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/article_images/editor_01.png)         
 
-   ![](../article_images/editor_2.png)        
+   ![](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/article_images/editor_2.png)        
 
 热点简易编辑器包含了热点hotspot的常用属性的编辑，如：拖拽、尺寸（scale）、透明度（alpha）、深度（depth）、旋转（rotate）、偏移（offset）和3D旋转（3drotate）。    
 
@@ -15,25 +15,25 @@ krpano是一款强大的全景引擎，可以帮助全景爱好者和开发者�
 
 1.选择全景文件夹：
 
-​    ![](../article_images/editor_3.png)    
+​    ![](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/article_images/editor_3.png)    
 
 注意：全景主文件必须是tour.xml和tour.swf，且位于根目录；     
 
 2.点击右上角齿轮图标，打开工具栏：
 
-   ![](/editor_4.png)         
+   ![](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/editor_4.png)         
 
      
 
 3.右侧彩色图标为各个工具，左侧下拉列表会罗列出可编辑的热点。首先选择要编辑的热点，然后点击右侧工具进行编辑。      
 
-   ![](../article_images/editor_5.png)
+   ![](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/article_images/editor_5.png)
 
     
 
 4.编辑结束后会弹出结果复制提示，然后把结果粘贴到对应代码处就可以啦！    
 
-​    ![](../article_images/editor_2.png)
+​    ![](https://github.com/CiroLee/blog/blob/gh-pages/static/mydata/article_images/editor_2.png)
 
 
 
