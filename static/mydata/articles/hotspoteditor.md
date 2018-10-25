@@ -21,7 +21,7 @@ krpano是一款强大的全景引擎，可以帮助全景爱好者和开发者�
 
 2.点击右上角齿轮图标，打开工具栏：
 
-   ![](https://cirolee.github.io/blog/static/mydata/editor_4.png)         
+   ![](https://cirolee.github.io/blog/static/mydata/article_images/editor_4.png)         
 
      
 
