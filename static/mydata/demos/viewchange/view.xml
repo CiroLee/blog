@@ -1,0 +1,108 @@
+
+<krpano>
+	<events name="view_change_event" keep="true"
+		onviewchange="change_view()"
+		/>
+
+	<!--视野坐标显示-->
+	<layer name="view_layer_container" type="container" keep="true" align="righttop" width="220" height="220" x="100" y="20" alpha="1" bgalpha="1" bgcolor="0xffffff" bgroundedge="4" maskchildren="true" enabled="true" zorder="10" bgcapture="true" ondown="draglayer()" onloaded="change_view()" visible="true" >
+		<layer name="ivew_title_container" type="container" width="100%" height="40" align="top" bgalpha="1" bgcolor="0xffffff" bgroundedge="4 4 0 0" bgborder="1 0xE0E0E0" >
+			<layer name="view_layer_title" type="text" bgalpha="1" height="40" html="坐标拾取" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;font-weight:bold;padding:0 10px" />
+		</layer>
+		<layer name="view_layer_items_container" type="container" width="100%" hegiht="120" align="top" y="41" bgalpha="1" bgcolor="0xffffff" >
+			<layer name="view_layer_item1" type="container" width="100%" height="40" align="top" y="0" bgalpha="1" bgcolor="0xffffff" >
+				<layer name="item_fov" type="text" bgalpha="1" align="lefttop" width="30%" height="40" html="fov" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;font-weight:bold;padding:0 0 0 8px" />
+				<layer name="item_fov_text" type="text" align="lefttop" bgalpha="1" width="70%" height="40" html="100" x="30%" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;" />
+			</layer>
+			<layer name="view_layer_item2" type="container" width="100%" height="40" align="top" y="41" bgalpha="1" bgcolor="0xffffff" >
+				<layer name="item_hlookat" type="text" bgalpha="1" align="lefttop" width="30%" height="40" html="hlookat" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;font-weight:bold;padding:0 0 0 8px" />
+				<layer name="item_hlookat_text" type="text" align="lefttop" bgalpha="1" width="70%" height="40" html="100" x="30%" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;" />
+			</layer> 
+			<layer name="view_layer_item3" type="container" width="100%" height="40" align="top" y="82" bgalpha="1" bgcolor="0xffffff" >
+				<layer name="item_vlookat" type="text" bgalpha="1" align="lefttop" width="30%" height="40" html="vlookat" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;font-weight:bold;padding:0 0 0 8px" />
+				<layer name="item_vlookat_text" type="text" align="lefttop" bgalpha="1" width="70%" height="40" html="100" x="30%" vcenter="true" css="color:#000000; font-family:Arial;font-size:14px;text-align:left;" />
+			</layer>
+		</layer>
+		<layer name="view_layer_bottom_container" type="container" width="100%" height="60" align="top" y="160" bgalpha="1" bgborder="1 0xE0E0E0" bgcolor="0xffffff" >
+			<layer name="ok_btn" type="text" align="right" onhover="tween(alpha,0.8)" onout="tween(alpha,1)" x="10" html="确定" bgroundedge="2" bgcolor="0x2D8CF0" css="color:#FFFFFF; font-family:Arial;font-size:14px;text-align:center; padding:6px 15px" onclick="view_change_ok();active_message()" />
+			<layer name="cancel_btn" type="text" align="right" onhover="tween(alpha,0.6)" onout="tween(alpha,1)" html="取消" bgroundedge="2" x="85" bgalpha="0" bgcolor="0x2D8CF0" css="color:#4A4B4B; font-family:Arial;font-size:14px;text-align:center; padding:6px 15px" onclick="view_change_cancel()" />
+		</layer>
+	</layer>
+
+	<!--message提示-->
+	<layer name="message_toast" keep="true" type="text" align="top" y="-50" width="150" height="40" bgalpha="0.5" alpha="0" vcenter="true" visible="false" bgcolor="0x000000" bgroundedge="50" html="已复制到剪贴板" css="color:#ffffff; font-family:Arial;font-size:14px;text-align:center;" />
+
+	<!--视野监听-->
+	<action name="change_view" >
+		copy(fov,view.fov);
+		copy(h,view.hlookat);
+		copy(v,view.vlookat);
+		roundval(fov,3);
+		roundval(h,3);
+		roundval(v,3);
+		set(layer[item_fov_text].html,get(fov));
+		set(layer[item_hlookat_text].html,get(h));
+		set(layer[item_vlookat_text].html,get(v));
+	</action>
+
+	<!--拖拽图层-->
+	<action name="draglayer">
+		copy(drag_currentx, x);
+		copy(drag_currenty, y);
+		copy(drag_stagex, mouse.stagex);
+		copy(drag_stagey, mouse.stagey);
+		indexoftxt(align_contains_right, get(align), 'right');
+		indexoftxt(align_contains_bottom, get(align), 'bottom');
+		calc(drag_align_x, align_contains_right GE 0 ? -1 : +1);
+		calc(drag_align_y, align_contains_bottom GE 0 ? -1 : +1);
+		asyncloop(pressed,
+			calc(x, drag_currentx + (mouse.stagex - drag_stagex)*drag_align_x);
+			calc(y, drag_currenty + (mouse.stagey - drag_stagey)*drag_align_y);
+		  );
+	</action>
+
+	<!--取消-->
+	<action name="view_change_cancel" >
+		tween(layer[view_layer_container].alpha,0);
+		delayedcall(0.5,set(layer[view_layer_container].visible,false));
+	</action>
+
+	<!--确定-->
+	<action name="view_change_ok" type="Javascript" ><![CDATA[
+		  var el = document.createElement('textarea');
+		  var value = "hlookat=\"" + krpano.get("view.hlookat").toFixed(3) + "\" vlookat=\"" + krpano.get("view.vlookat").toFixed(3) + "\" fovtype=\"MFOV\" fov=\"" + krpano.get("view.fov").toFixed(3) + "\"";
+		  el.value = value;
+		  el.setAttribute('readonly', '');
+		  el.style.position = 'absolute';
+		  el.style.left = '-9999px';
+		  document.body.appendChild(el);
+		  var selected =
+		    document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
+		  el.select();
+		  document.execCommand('copy');
+		  document.body.removeChild(el);
+		  if (selected) {
+		    document.getSelection().removeAllRanges();
+		    document.getSelection().addRange(selected);
+		  };
+	]]></action>
+
+	<!--激活message提示-->
+	<action name="active_message" >
+		set(layer[message_toast].visible,true);
+		tween(layer[message_toast].alpha,1);
+		tween(layer[message_toast].y,30);
+
+		delayedcall(1.5,hide_message());
+	</action>
+	
+	<!--隐藏提示-->
+	<action name="hide_message" >
+		tween(layer[message_toast].alpha,0);
+		tween(layer[message_toast].y,-50);
+		delayedcall(0.5,set(layer[message_toast].visible,false));
+	</action>
+
+
+
+</krpano>
